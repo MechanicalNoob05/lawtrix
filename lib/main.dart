@@ -17,24 +17,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
-  Future<bool?> _stat() async {
-    var sharedpref = await SharedPreferences.getInstance();
-    var stat = sharedpref.getBool("service_provider");
-    if (stat!=null){
-      if(stat){
-        return true;
-      }else{
-        return false;
-      }
-    }else{
-      return false;
-    }
-  }
   @override
   Widget build(BuildContext context) {
 
-    bool lawyer = false;
 
 
     return MultiProvider(
@@ -50,7 +35,7 @@ class _MyAppState extends State<MyApp> {
             title: 'Lawtrix',
             darkTheme: provider.followsystem ? darkTheme : provider.theme,
             theme: provider.followsystem ? lightTheme : provider.theme,
-            onGenerateRoute: lawyer ? route.ServicesController : route.generalController,
+            onGenerateRoute: route.generalController,
             initialRoute: route.Splash,
           );
         }
