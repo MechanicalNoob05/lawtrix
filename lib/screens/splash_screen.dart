@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
 import 'package:lawtrix/screens/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,16 +18,25 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     void whereToGo() async{
-      // var sharedpref = await SharedPreferences.getInstance();
-      // var isLoggedin = sharedpref.getString("token");
+      var sharedpref = await SharedPreferences.getInstance();
+      var service_provider = sharedpref.getBool("service_provider");
 
-      var isLoggedin = null;
+      // var service_provider = null;
+      bool isLoggedin = true;
       Timer(const Duration(seconds: 2),(){
-        if(isLoggedin!=null){
-          if(isLoggedin != null ){
-            Navigator.pushReplacementNamed(context, route.Home );
+        if(service_provider!=null){
+          if(service_provider){
+            if(isLoggedin){
+              Navigator.pushReplacementNamed(context, route.Home );
+            }else{
+              Navigator.pushReplacementNamed(context, route.Login );
+            }
           }else{
-            Navigator.pushReplacementNamed(context, route.Login );
+            if(isLoggedin){
+              Navigator.pushReplacementNamed(context, route.Home );
+            }else{
+              Navigator.pushReplacementNamed(context, route.Login );
+            }
           }
         }else{
           Navigator.of(context).push(
