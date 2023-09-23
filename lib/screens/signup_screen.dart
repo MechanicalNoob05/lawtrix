@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-// import 'package:coco/services/upload_photo_service.dart';
+import 'package:lawtrix/services/upload_photo_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lawtrix/router/router.dart' as route;
@@ -105,28 +105,28 @@ class _SignupPageState extends State<SignupPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       const Spacer(),
-                      Stack(
-                        children: [
-                          _path != null
-                              ? CircleAvatar(
-                                  radius: 60,
-                                  backgroundImage: FileImage(File(_path!)),
-                                )
-                              : const CircleAvatar(
-                                  radius: 60,
-                                  backgroundImage:
-                                      AssetImage("./assets/images/logo.png")),
-                          Positioned(
-                            bottom: -10,
-                            left: 80,
-                            child: IconButton(
-                                onPressed: () {
-                                  // selectImage();
-                                },
-                                icon: const Icon(Icons.add_a_photo)),
-                          )
-                        ],
-                      ),
+                      // Stack(
+                      //   children: [
+                      //     _path != null
+                      //         ? CircleAvatar(
+                      //             radius: 60,
+                      //             backgroundImage: FileImage(File(_path!)),
+                      //           )
+                      //         : const CircleAvatar(
+                      //             radius: 60,
+                      //             backgroundImage:
+                      //                 AssetImage("./assets/images/logo.png")),
+                      //     Positioned(
+                      //       bottom: -10,
+                      //       left: 80,
+                      //       child: IconButton(
+                      //           onPressed: () {
+                      //             // selectImage();
+                      //           },
+                      //           icon: const Icon(Icons.add_a_photo)),
+                      //     )
+                      //   ],
+                      // ),
                       TextField(
                         decoration: const InputDecoration(
                             suffixIcon:
@@ -187,7 +187,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.popAndPushNamed(context, route.Login);
+                          Navigator.popAndPushNamed(context, route.loginPage);
                         },
                         child: Text(
                           "Login",

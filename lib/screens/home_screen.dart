@@ -1,72 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:lawtrix/components/navigation_drawer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:lawtrix/router/router.dart' as route;
+import 'package:lawtrix/screens/trial%20pages/ajit_trial_screen.dart';
+import 'package:lawtrix/screens/trial%20pages/samarth_trial_screen.dart';
 
-
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  String type="";
-  _check()async{
-
-    var sharedpref = await SharedPreferences.getInstance();
-    var stat = sharedpref.getBool("service_provider")!;
-    if(stat!=null){
-      if(stat){
-        setState(() {
-          type = "green";
-        });
-      }else{
-        setState(() {
-
-          type = "hell";
-        });
-      }
-    }else{
-      throw("UNdefined users");
-    }
-  }
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    try{
-      _check();
-    }catch(err){
-      print(err);
-    }
-  }
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    return DefaultTabController(
+      length: 2, // Number of tabs
+      child: Scaffold(
         appBar: AppBar(
-          title: const Text("Home"),
+          title: Text('Dashboard'),
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'New Cases'),
+              Tab(text: 'News'),
+            ],
+          ),
         ),
-        // drawer: const NavDrawer(),
-        body: Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Center(child: Text(type.toString())),
+        drawer: NavDrawer(),
+        body: TabBarView(
+          children: [
+            SamarthTrialPage(),
+            AjitTrialPage(),
+          ],
         ),
-      drawer: NavDrawer(),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async{
-
-          var sharedpref = await SharedPreferences.getInstance();
-          sharedpref.remove("service_provider")!;
-
-        },
-        icon: const Icon(Icons.qr_code),
-        label: const Text("Scan"),
       ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+
   }
 }
 

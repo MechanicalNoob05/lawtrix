@@ -1,0 +1,172 @@
+{
+  "new_case": [
+    {
+      "title": "Namera case",
+      "desc": "case of pick poketing in a violent manner",
+      "type": "Criminal case"
+    },
+    {
+      "title": "John Smith case",
+      "desc": "case of murder in the first degree",
+      "type": "Criminal case"
+    },
+    {
+      "title": "Jane Doe case",
+      "desc": "case of sexual assault",
+      "type": "Criminal case"
+    },
+    {
+      "title": "Acme Corporation case",
+      "desc": "case of product liability",
+      "type": "Civil case"
+    },
+    {
+      "title": "Bob Jones case",
+      "desc": "case of breach of contract",
+      "type": "Civil case"
+    },
+    {
+      "title": "Mary Smith case",
+      "desc": "case of child custody",
+      "type": "Family case"
+    },
+    {
+      "title": "David Doe case",
+      "desc": "case of divorce",
+      "type": "Family case"
+    },
+    {
+      "title": "Acme Corporation case",
+      "desc": "case of bankruptcy",
+      "type": "Bankruptcy case"
+    },
+    {
+      "title": "Bob Jones case",
+      "desc": "case of intellectual property theft",
+      "type": "Intellectual property case"
+    },
+    {
+      "title": "Mary Smith case",
+      "desc": "case of environmental pollution",
+      "type": "Environmental case"
+    }
+
+  ],
+  "all_cases": [
+    {
+      "title": "Majnu case",
+      "date": "05 August",
+      "solved": false,
+      "type": "Criminal case",
+      "desc": "Murder of a woman in Majnu Ka Tila, Delhi",
+      "status": "Under investigation"
+    },
+    {
+      "title": "Delhi Hit-and-Run Case",
+      "date": "24 September 2023",
+      "solved": false,
+      "type": "Criminal case",
+      "desc": "A pedestrian was killed by a hit-and-run driver in Delhi. The driver has not yet been identified.",
+      "status": "Under investigation"
+    },
+
+    {
+      "title": "Mumbai Bank Robbery Case",
+      "date": "23 September 2023",
+      "solved": true,
+      "type": "Criminal case",
+      "desc": "Four men robbed a bank in Mumbai and made off with over ₹1 crore. The suspects were later arrested and the stolen money was recovered.",
+      "status": "Closed"
+    },
+
+    {
+      "title": "Bengaluru Tech Layoff Case",
+      "date": "22 September 2023",
+      "solved": false,
+      "type": "Civil case",
+      "desc": "A tech company in Bengaluru laid off over 100 employees without notice. The employees are suing the company for wrongful termination.",
+      "status": "Ongoing"
+    },
+
+    {
+      "title": "Noida Pollution Case",
+      "date": "21 September 2023",
+      "solved": false,
+      "type": "Environmental case",
+      "desc": "A group of residents in Noida are suing a local factory for polluting the air and water.",
+      "status": "Ongoing"
+    },
+
+    {
+      "title": "Supreme Court Marriage Case",
+      "date": "20 September 2023",
+      "solved": true,
+      "type": "Civil case",
+      "desc": "The Supreme Court of India ruled that same-sex marriage is legal in India.",
+      "status": "Closed"
+    }
+
+  ],
+  "laws": [
+    {
+      "name": "Bharatiya Nyaya Sanhita Bill, 2023",
+      "description": "Overhauls the Indian Penal Code, 1860, with a focus on stricter punishments for serious crimes and faster justice delivery."
+    },
+    {
+      "name": "Bharatiya Nagarik Suraksha Sanhita Bill, 2023",
+      "description": "Replaces the Criminal Procedure Code, 1898, and introduces new provisions to protect the rights of victims and witnesses."
+    },
+    {
+      "name": "Bharatiya Sakshya Bill, 2023",
+      "description": "Replaces the Indian Evidence Act, 1872, and makes it easier to admit evidence in court."
+    },
+    {
+      "name": "Anusandhan National Research Foundation Bill, 2023",
+      "description": "Establishes a new national research foundation to support fundamental research in science and technology."
+    },
+    {
+      "name": "Offshore Areas Mineral (Development and Regulation) Amendment Bill, 2023",
+      "description": "Streamlines the process for awarding licenses to explore and mine minerals in offshore areas."
+    },
+    {
+      "name": "Registration of Births and Deaths (Amendment) Bill, 2023",
+      "description": "Creates a national database of registered births and deaths."
+    },
+    {
+      "name": "Jammu and Kashmir Reservation (Amendment) Bill, 2023",
+      "description": "Increases the reservation for Scheduled Tribes in Jammu and Kashmir from 7.5% to 15%."
+    },
+    {
+      "name": "Constitution (Scheduled Castes) Order (Amendment) Bill, 2023",
+      "description": "Includes the Dalit community of Notified, Nomadic and Semi-Nomadic Tribes (DNTs) in the list of Scheduled Castes."
+    },
+    {
+      "name": "National Nursing and Midwifery Commission Bill, 2023",
+      "description": "Establishes a separate regulatory body for nurses and midwives."
+    },
+    {
+      "name": "National Dental Commission Bill, 2023",
+      "description": "Establishes a separate regulatory body for dentists."
+    },
+    {
+      "name": "Cinematograph (Amendment) Bill, 2023",
+      "description": "Empowers the central government to regulate the exhibition of films online."
+    },
+    {
+      "name": "Government of National Capital Territory of Delhi (Amendment) Bill, 2023",
+      "description": "Gives the central government more power over the administration of Delhi."
+    },
+    {
+      "name": "Indian Institutes of Management (Amendment) Bill, 2023",
+      "description": "Grants autonomy to the Indian Institutes of Management."
+    },
+    {
+      "name": "Pharmacy (Amendment) Bill, 2023",
+      "description": "Makes it mandatory for all pharmacists to register with a state pharmacy council."
+    },
+    {
+      "name": "Digital Personal Data Protection Bill, 2023",
+      "description": "Protects the privacy of individuals' personal data."
+    }
+  ]
+}

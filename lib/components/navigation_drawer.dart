@@ -1,5 +1,9 @@
+import 'package:lawtrix/screens/trial%20pages/ajit_trial_screen.dart';
+import 'package:lawtrix/screens/trial%20pages/cases_screen.dart';
+import 'package:lawtrix/screens/trial%20pages/samarth_trial_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavDrawer extends StatefulWidget {
   const NavDrawer({super.key});
@@ -19,11 +23,11 @@ class _NavDrawerState extends State<NavDrawer> {
             decoration: BoxDecoration(
 
               gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
                   colors: [
-                    Colors.purple,
-                    Color(0xff281537),
+                    Color(0xff064469),
+                    Color(0xff5790ab),
                   ]),
             ),
             accountEmail: Text("emailaddress"),
@@ -43,54 +47,57 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text("Home"),
+            leading: const Icon(Icons.grid_view_sharp),
+            title: const Text("Dashboard"),
             onTap: () {
-              Navigator.popAndPushNamed(context, route.Home);
+              Navigator.popAndPushNamed(context, route.homePage);
             },
           ),
           ListTile(
-            leading: const Icon(Icons.store),
-            title: const Text("Shop"),
+            leading: const Icon(Icons.calendar_month),
+            title: const Text("Schedule"),
             onTap: () {
-              // Navigator.popAndPushNamed(context, route.shopPage);
-            },
-          ),
-          const ListTile(
-            leading: Icon(Icons.medical_services),
-            title: Text("Doctor"),
-          ),
-          const ListTile(
-            leading: Icon(Icons.group),
-            title: Text("Services"),
-          ),
-          ListTile(
-            leading: const Icon(Icons.downloading),
-            title: const Text("Samarth"),
-            onTap: (){
-              // Navigator.of(context).push(
-              //     MaterialPageRoute(
-              //         builder: (context)=>const SamarthTrialPage()
-              //     )
-              // );
+              Navigator.popAndPushNamed(context, route.shopPage);
             },
           ),
           ListTile(
-            leading: const Icon(Icons.downloading),
-            title: const Text("Ajit"),
-            onTap: (){
-              // Navigator.of(context).push(
-              //     MaterialPageRoute(
-              //         builder: (context)=>const AjitTrialPage()
-              //     )
-              // );
-            },
+            leading: Icon(Icons.list),
+            title: Text("Cases"),
+    onTap: (){
+        Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context)=>const CasesPage()
+            )
+        );
+      },
           ),
+          // ListTile(
+          //   leading: const Icon(Icons.downloading),
+          //   title: const Text("Samarth"),
+          //   onTap: (){
+          //     Navigator.of(context).push(
+          //         MaterialPageRoute(
+          //             builder: (context)=>const SamarthTrialPage()
+          //         )
+          //     );
+          //   },
+          // ),
+          // ListTile(
+          //   leading: const Icon(Icons.downloading),
+          //   title: const Text("Ajit"),
+          //   onTap: (){
+          //     Navigator.of(context).push(
+          //         MaterialPageRoute(
+          //             builder: (context)=>const AjitTrialPage()
+          //         )
+          //     );
+          //   },
+          // ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text("Settings"),
             onTap: (){
-              // Navigator.popAndPushNamed(context, route.settingsPage);
+              Navigator.popAndPushNamed(context, route.settingsPage);
             },
           ),
           const Spacer(),
@@ -106,9 +113,9 @@ class _NavDrawerState extends State<NavDrawer> {
             leading: const Icon(Icons.logout),
             title: const Text("Logout"),
             onTap: () async{
-              // var sharedpref = await SharedPreferences.getInstance();
-              // sharedpref.remove("token");
-              // Navigator.pushReplacementNamed(context, route.loginPage);
+              var sharedpref = await SharedPreferences.getInstance();
+              sharedpref.remove("token");
+              Navigator.pushReplacementNamed(context, route.loginPage);
             },
           )
 

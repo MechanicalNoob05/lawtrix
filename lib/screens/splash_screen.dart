@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
-import 'package:lawtrix/screens/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,31 +18,16 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     void whereToGo() async{
       var sharedpref = await SharedPreferences.getInstance();
-      var service_provider = sharedpref.getBool("service_provider");
-
-      // var service_provider = null;
-      bool isLoggedin = true;
+      var isLoggedin = sharedpref.getString("token");
       Timer(const Duration(seconds: 2),(){
-        if(service_provider!=null){
-          if(service_provider){
-            if(isLoggedin){
-              Navigator.pushReplacementNamed(context, route.Home );
-            }else{
-              Navigator.pushReplacementNamed(context, route.Login );
-            }
+        if(isLoggedin!=null){
+          if(isLoggedin != null ){
+            Navigator.pushReplacementNamed(context, route.homePage );
           }else{
-            if(isLoggedin){
-              Navigator.pushReplacementNamed(context, route.Home );
-            }else{
-              Navigator.pushReplacementNamed(context, route.Login );
-            }
+            Navigator.pushReplacementNamed(context, route.loginPage );
           }
         }else{
-          Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (context)=>const Onboarding()
-              )
-          );
+          Navigator.pushReplacementNamed(context, route.loginPage );
         }
       },);
     }
