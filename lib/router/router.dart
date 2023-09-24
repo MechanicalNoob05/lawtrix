@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:lawtrix/screens/allSettingsScreenCollection/account_setting_screen.dart';
 import 'package:lawtrix/screens/home_screen.dart';
 import 'package:lawtrix/screens/login_screen.dart';
@@ -6,6 +8,8 @@ import 'package:lawtrix/screens/signup_screen.dart';
 import 'package:lawtrix/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/trial pages/schedulepage.dart';
+
 const String loginPage = 'login';
 const String signupPage = 'signup';
 const String homePage = 'home';
@@ -13,7 +17,7 @@ const String shopPage = "shop";
 
 const String settingsPage = "settings";
 const String accountSettingsPage = "accountSettings";
-
+const String Cal = 'calendar';
 
 const String Splash = "splash";
 
@@ -31,6 +35,8 @@ Route<dynamic> generalController(RouteSettings settings){
       // Pages in settings
     case accountSettingsPage:
       return MaterialPageRoute(builder: (context) => const AccountSettingsPage());
+    case Cal:
+      return MaterialPageRoute(builder: (context) =>  TableEventsExample());
     case Splash:
       return MaterialPageRoute(builder: (context) => const SplashScreen());
       // Default response

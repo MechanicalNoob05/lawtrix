@@ -57,7 +57,7 @@ class _NavDrawerState extends State<NavDrawer> {
             leading: const Icon(Icons.calendar_month),
             title: const Text("Schedule"),
             onTap: () {
-              Navigator.popAndPushNamed(context, route.shopPage);
+              Navigator.popAndPushNamed(context, route.Cal);
             },
           ),
           ListTile(
