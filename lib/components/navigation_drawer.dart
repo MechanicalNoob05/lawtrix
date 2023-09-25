@@ -63,13 +63,20 @@ class _NavDrawerState extends State<NavDrawer> {
           ListTile(
             leading: Icon(Icons.list),
             title: Text("Cases"),
-    onTap: (){
-        Navigator.of(context).push(
-            MaterialPageRoute(
+            onTap: (){
+                Navigator.of(context).push(
+                  MaterialPageRoute(
                 builder: (context)=>const CasesPage()
             )
         );
       },
+          ),
+          ListTile(
+            leading: const Icon(Icons.calendar_month),
+            title: const Text("user side"),
+            onTap: () {
+              Navigator.popAndPushNamed(context, route.nap);
+            },
           ),
           // ListTile(
           //   leading: const Icon(Icons.downloading),

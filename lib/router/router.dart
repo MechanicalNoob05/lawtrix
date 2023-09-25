@@ -1,5 +1,9 @@
-import 'dart:js';
-
+// import 'dart:js';
+import 'package:device_apps/device_apps.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:android_intent/android_intent.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:url_launcher/url_launcher.dart';
 import 'package:lawtrix/screens/allSettingsScreenCollection/account_setting_screen.dart';
 import 'package:lawtrix/screens/home_screen.dart';
 import 'package:lawtrix/screens/login_screen.dart';
@@ -7,6 +11,8 @@ import 'package:lawtrix/screens/settings_screen.dart';
 import 'package:lawtrix/screens/signup_screen.dart';
 import 'package:lawtrix/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
 
 import '../screens/trial pages/schedulepage.dart';
 
@@ -18,6 +24,7 @@ const String shopPage = "shop";
 const String settingsPage = "settings";
 const String accountSettingsPage = "accountSettings";
 const String Cal = 'calendar';
+const String nap = 'nap';
 
 const String Splash = "splash";
 
@@ -37,6 +44,10 @@ Route<dynamic> generalController(RouteSettings settings){
       return MaterialPageRoute(builder: (context) => const AccountSettingsPage());
     case Cal:
       return MaterialPageRoute(builder: (context) =>  TableEventsExample());
+    case nap:
+      open();
+      return MaterialPageRoute(builder: (context) => const HomePage());
+
     case Splash:
       return MaterialPageRoute(builder: (context) => const SplashScreen());
       // Default response
@@ -44,4 +55,54 @@ Route<dynamic> generalController(RouteSettings settings){
       throw("Route non existing");
   }
 }
+// Future<void> openOtherApp() async {
+//   final String packageName = "com.example.otherapp"; // Replace with the package name of the other app (Android-specific)
+//
+//   try {
+//     // Try to open the other app using its custom URL scheme (if available)
+//     final bool canLaunchCustomScheme = await canLaunch('http://localhost:46028/'); // Replace with the custom URL scheme of the other app
+//     if (canLaunchCustomScheme) {
+//       await launch('http://localhost:46028/'); // Replace with the custom URL scheme of the other app
+//     } else {
+//       // If the custom scheme is not available, try a universal app link or website URL (iOS, web, Windows, Linux)
+//       final bool canLaunchUniversalLink = await canLaunch('http://localhost:46028/'); // Replace with the universal link or website URL
+//       if (canLaunchUniversalLink) {
+//         await launch('http://localhost:46028/'); // Replace with the universal link or website URL
+//       } else {
+//         throw "Could not launch the other app.";
+//       }
+//     }
+//   } catch (e) {
+//     throw "Error: $e";
+//   }
+// }
+//web final
+// Future<void> openOtherApp() async {
+//   final String url = "http://localhost:46028/"; // Replace with the custom URL scheme of the other app
+//
+//   if (await canLaunch(url)) {
+//     await launch(url);
+//   } else {
+//     // If the app is not installed or doesn't handle the URL scheme, open a web page or a fallback URL
+//     final String fallbackUrl = "https://openai.com/"; // Replace with a web URL or a fallback URL
+//     await launch(fallbackUrl);
+//   }
+// }
 
+open() async {
+  try {
+    ///checks if the app is installed on your mobile device
+    // DeviceApps.openApp("com.supercell.clashofclans");
+    bool isInstalled = await DeviceApps.isAppInstalled('com.example.trialforeverything');
+    print('xxce');
+    print(isInstalled);
+    if (isInstalled) {
+      DeviceApps.openApp("com.example.trialforeverything");
+    } else {
+      ///if the app is not installed it lunches google play store so you can install it from there
+      launchUrlString("http://localhost:46028/");
+    }
+  } catch (e) {
+    print(e);
+  }
+}
