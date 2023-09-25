@@ -1,7 +1,6 @@
 // import 'dart:js';
 import 'package:device_apps/device_apps.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:android_intent/android_intent.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lawtrix/screens/allSettingsScreenCollection/account_setting_screen.dart';
