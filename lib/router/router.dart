@@ -1,5 +1,8 @@
 // import 'dart:js';
+import 'dart:ui';
+
 import 'package:device_apps/device_apps.dart';
+import 'package:lawtrix/screens/trial%20pages/ltpconv.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:url_launcher/url_launcher.dart';
@@ -13,7 +16,9 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 
+import '../screens/trial pages/iforweb.dart';
 import '../screens/trial pages/schedulepage.dart';
+import '../screens/trial pages/webframe.dart';
 
 const String loginPage = 'login';
 const String signupPage = 'signup';
@@ -24,9 +29,9 @@ const String settingsPage = "settings";
 const String accountSettingsPage = "accountSettings";
 const String Cal = 'calendar';
 const String nap = 'nap';
-
+const String legalese = 'legalese';
 const String Splash = "splash";
-
+const String lawbot = 'lawbot';
 
 Route<dynamic> generalController(RouteSettings settings){
   switch (settings.name){
@@ -46,7 +51,14 @@ Route<dynamic> generalController(RouteSettings settings){
     case nap:
       open();
       return MaterialPageRoute(builder: (context) => const HomePage());
-
+    case legalese:
+      return MaterialPageRoute(builder: (context) => PDFTextViewer());
+    case lawbot:
+      if(kIsWeb){
+        return MaterialPageRoute(builder: (context) => webb());
+      }else{
+        return MaterialPageRoute(builder: (context) => Weba());
+      }
     case Splash:
       return MaterialPageRoute(builder: (context) => const SplashScreen());
       // Default response
@@ -92,11 +104,11 @@ open() async {
   try {
     ///checks if the app is installed on your mobile device
     // DeviceApps.openApp("com.supercell.clashofclans");
-    bool isInstalled = await DeviceApps.isAppInstalled('com.example.trialforeverything');
+    bool isInstalled = await DeviceApps.isAppInstalled('com.example.petco');
     print('xxce');
     print(isInstalled);
     if (isInstalled) {
-      DeviceApps.openApp("com.example.trialforeverything");
+      DeviceApps.openApp("com.example.petco'");
     } else {
       ///if the app is not installed it lunches google play store so you can install it from there
       launchUrlString("http://localhost:46028/");

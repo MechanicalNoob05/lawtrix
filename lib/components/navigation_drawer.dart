@@ -30,14 +30,14 @@ class _NavDrawerState extends State<NavDrawer> {
                     Color(0xff5790ab),
                   ]),
             ),
-            accountEmail: Text("emailaddress"),
+            accountEmail: Text("jayeshree@gmail.com"),
             currentAccountPictureSize: Size(50, 50),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.transparent,
-              backgroundImage: NetworkImage("https://i.pinimg.com/564x/28/4b/7a/284b7a9e763832cf3281db31a728a665.jpg"),
+              backgroundImage: NetworkImage("https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"),
             ),
             accountName: Text(
-              "Username",
+              "Jayeshree",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -70,6 +70,20 @@ class _NavDrawerState extends State<NavDrawer> {
             )
         );
       },
+          ),
+          ListTile(
+            leading: const Icon(Icons.picture_as_pdf),
+            title: const Text("Legalese"),
+            onTap: () {
+              Navigator.popAndPushNamed(context, route.legalese);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.chat),
+            title: const Text("LawBot"),
+            onTap: () {
+              Navigator.popAndPushNamed(context, route.lawbot);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.calendar_month),
@@ -109,7 +123,7 @@ class _NavDrawerState extends State<NavDrawer> {
           ),
           const Spacer(),
           const Text(
-            "MechanicalNoob © 2023. All rights reserved.",
+            "Coditt © 2023. All rights reserved.",
             style: TextStyle(
               fontSize: 10,
               color: Colors.grey,

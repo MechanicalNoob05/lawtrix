@@ -40,6 +40,10 @@ dependencies:
   url_launcher: ^6.1.14
   table_calendar: ^3.0.9
   device_apps: ^2.2.0
+  syncfusion_flutter_pdf: ^23.1.36
+  file_picker: ^5.5.0
+  http: ^1.1.0
+  webview_flutter: ^4.2.4
 
 
 

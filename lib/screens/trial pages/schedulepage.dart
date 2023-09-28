@@ -87,6 +87,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
       appBar: AppBar(
         title: Text('TableCalendar - Events'),
       ),
+      drawer: NavDrawer(),
       body: Column(
         children: [
           TableCalendar<Event>(
