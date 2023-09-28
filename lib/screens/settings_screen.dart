@@ -1,8 +1,8 @@
-import 'package:lawtrix/components/navigation_drawer.dart';
 import 'package:lawtrix/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -20,8 +20,14 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
+        actions: [
+          IconButton(onPressed: () async{
+    var sharedpref = await SharedPreferences.getInstance();
+    sharedpref.remove("token");
+    Navigator.pushReplacementNamed(context, route.loginPage);
+    }, icon: Icon(Icons.logout))
+        ],
       ),
-      drawer: const NavDrawer(),
       body: ListView(
         children: [
           ListTile(
@@ -57,7 +63,7 @@ class _SettingsPageState extends State<SettingsPage> {
             title: const Text('Accounts'),
             subtitle: const Text('Change account details....'),
             onTap: () {
-              Navigator.popAndPushNamed(context, route.accountSettingsPage);
+              Navigator.pushNamed(context, route.accountSettingsPage);
             },
           ),
           const Divider(height: 0),

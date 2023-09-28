@@ -1,6 +1,4 @@
-import 'package:lawtrix/screens/trial%20pages/ajit_trial_screen.dart';
 import 'package:lawtrix/screens/trial%20pages/cases_screen.dart';
-import 'package:lawtrix/screens/trial%20pages/samarth_trial_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
 import 'package:shared_preferences/shared_preferences.dart';

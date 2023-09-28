@@ -1,11 +1,6 @@
-// import 'dart:js';
-import 'dart:ui';
-
 import 'package:device_apps/device_apps.dart';
 import 'package:lawtrix/screens/trial%20pages/ltpconv.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:url_launcher/url_launcher.dart';
 import 'package:lawtrix/screens/allSettingsScreenCollection/account_setting_screen.dart';
 import 'package:lawtrix/screens/home_screen.dart';
 import 'package:lawtrix/screens/login_screen.dart';
@@ -47,7 +42,7 @@ Route<dynamic> generalController(RouteSettings settings){
     case accountSettingsPage:
       return MaterialPageRoute(builder: (context) => const AccountSettingsPage());
     case Cal:
-      return MaterialPageRoute(builder: (context) =>  TableEventsExample());
+      return MaterialPageRoute(builder: (context) =>  CalenderPage());
     case nap:
       open();
       return MaterialPageRoute(builder: (context) => const HomePage());

@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../services/upload_photo_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,33 +11,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool showPassword = true;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  _login() {
-    // var data = {
-    //   'email': emailController.text,
-    //   'password': passwordController.text,
-    // };
-    // var res = await Callapi().postLoginData(data, 'login');
-    //:w
-    // var body = json.decode(res.body);
-    // if (body['sucess']) {
-    //   var nav = Navigator.pushNamed(context, route.homePage);
-    //
-    //   var sharedpref = await SharedPreferences.getInstance();
-    //   sharedpref.setString("token",body['token']);
-    //   nav;
-    // } else {
-    //   const AlertDialog(
-    //     content: Text("Please recheck your details...."),
-    //     title: Text("Error"),
-    //   );
-    // }
 
-    if (emailController.text.toString() == "test") {
-      Navigator.pushNamed(context, route.homePage);
-    } else {}
-  }
 
   @override
   void dispose() {
@@ -52,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
@@ -104,12 +79,17 @@ class _LoginPageState extends State<LoginPage> {
                             )),
                       ),
                       TextFormField(
-                        obscureText: true,
+                        obscureText: showPassword,
                         controller: passwordController,
-                        decoration: const InputDecoration(
-                            suffixIcon:
-                                Icon(Icons.visibility_off, color: Colors.grey),
-                            label: Text(
+                        decoration: InputDecoration(
+
+                            suffix:
+                                IconButton(onPressed: (){
+                                  setState(() {
+                                    showPassword = !showPassword;
+                                  });
+                                }, icon: Icon(showPassword ? Icons.visibility_off: Icons.visibility, color: Colors.grey)),
+                            label: const Text(
                               "Password",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -141,23 +121,16 @@ class _LoginPageState extends State<LoginPage> {
 
                               var sharedpref = await SharedPreferences.getInstance();
                               sharedpref.setString("token","set");
-                            Navigator.pushNamed(context, route.homePage);
+                            Navigator.popAndPushNamed(context, route.homePage);
                           } else {
-                            AlertDialog(
-                              title: const Text('AlertDialog Title'),
-                              content: const Text('AlertDialog description'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(context, 'Cancel'),
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
+                            final snackBar = const SnackBar(
+                              content: Text(
+                                  'Wrong Credentials! \nPlease verify your details.'),
                             );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                         },
                         child: const Text("Login"),
