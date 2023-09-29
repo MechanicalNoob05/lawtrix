@@ -14,10 +14,10 @@ class _welcomeState extends State<welcome> {
   @override
   Widget build(BuildContext context) {
     final _introductionanimation =
-        Tween<Offset>(begin: Offset(0, 1), end: Offset(0.0, -1.0))
+        Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0.0, -1.0))
             .animate(CurvedAnimation(
       parent: widget.animationController,
-      curve: Interval(
+      curve: const Interval(
         0.0,
         0.2,
         curve: Curves.fastOutSlowIn,
@@ -38,7 +38,7 @@ class _welcomeState extends State<welcome> {
                 fit: BoxFit.cover,
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Text(
                 "Welcome To Lawtrix",
@@ -53,7 +53,7 @@ class _welcomeState extends State<welcome> {
                 style: TextStyle(color: Colors.black),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 48,
             ),
             Padding(
@@ -65,7 +65,7 @@ class _welcomeState extends State<welcome> {
                 },
                 child: Container(
                   height: 58,
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 56.0,
                     right: 56.0,
                     top: 16,
@@ -73,9 +73,9 @@ class _welcomeState extends State<welcome> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(38.0),
-                    color: Color(0xff132137),
+                    color: const Color(0xff132137),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Let's begin",
                     style: TextStyle(
                       fontSize: 18,
