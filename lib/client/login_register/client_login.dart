@@ -1,20 +1,46 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
 import 'package:shared_preferences/shared_preferences.dart';
 
+// import '../services/upload_photo_service.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class ClientLogin extends StatefulWidget {
+  const ClientLogin({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ClientLogin> createState() => _ClientLoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  bool showPassword = true;
+class _ClientLoginState extends State<ClientLogin> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  _login() {
+    // var data = {
+    //   'email': emailController.text,
+    //   'password': passwordController.text,
+    // };
+    // var res = await Callapi().postLoginData(data, 'login');
+    //:w
+    // var body = json.decode(res.body);
+    // if (body['sucess']) {
+    //   var nav = Navigator.pushNamed(context, route.homePage);
+    //
+    //   var sharedpref = await SharedPreferences.getInstance();
+    //   sharedpref.setString("token",body['token']);
+    //   nav;
+    // } else {
+    //   const AlertDialog(
+    //     content: Text("Please recheck your details...."),
+    //     title: Text("Error"),
+    //   );
+    // }
 
+    if (emailController.text.toString() == "test") {
+      Navigator.pushNamed(context, route.homePage);
+    } else {}
+  }
 
   @override
   void dispose() {
@@ -26,7 +52,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
@@ -36,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               decoration: const BoxDecoration(
                   gradient:
-                      LinearGradient(colors: [Colors.purple, Colors.black87])),
+                  LinearGradient(colors: [Colors.purple, Colors.black87])),
               child: const Padding(
                 padding: EdgeInsets.only(top: 60.0, left: 22),
                 child: Text(
@@ -79,17 +104,12 @@ class _LoginPageState extends State<LoginPage> {
                             )),
                       ),
                       TextFormField(
-                        obscureText: showPassword,
+                        obscureText: true,
                         controller: passwordController,
-                        decoration: InputDecoration(
-
-                            suffix:
-                                IconButton(onPressed: (){
-                                  setState(() {
-                                    showPassword = !showPassword;
-                                  });
-                                }, icon: Icon(showPassword ? Icons.visibility_off: Icons.visibility, color: Colors.grey)),
-                            label: const Text(
+                        decoration: const InputDecoration(
+                            suffixIcon:
+                            Icon(Icons.visibility_off, color: Colors.grey),
+                            label: Text(
                               "Password",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -119,19 +139,26 @@ class _LoginPageState extends State<LoginPage> {
                               passwordController.text.toString() ==
                                   "password") {
 
-                              var sharedpref = await SharedPreferences.getInstance();
-                              sharedpref.setString("usr_typ","lsprovider");
-                              sharedpref.setString("token","set");
-                            Navigator.popAndPushNamed(context, route.homePage);
+                            var sharedpref = await SharedPreferences.getInstance();
+                            sharedpref.setString("token","set");
+                            sharedpref.setString("usr_typ","client");
+                            Navigator.pushNamed(context, route.chome);
                           } else {
-                            final snackBar = const SnackBar(
-                              content: Text(
-                                  'Wrong Credentials! \nPlease verify your details.'),
+                            AlertDialog(
+                              title: const Text('AlertDialog Title'),
+                              content: const Text('AlertDialog description'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
                             );
-
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                         },
                         child: const Text("Login"),
@@ -147,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.popAndPushNamed(context, route.signupPage);
+                          Navigator.popAndPushNamed(context, route.cregister);
                         },
                         child: const Text(
                           "Sign up",
@@ -160,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 20,
                       ),
                       const Text(
-                        "MechanicalNoob © 2023. All rights reserved.",
+                        "Client login",
                         style: TextStyle(
                           fontSize: 10,
                           color: Colors.grey,

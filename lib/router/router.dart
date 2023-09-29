@@ -11,6 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 
+import '../client/clientScreens/client_home.dart';
+import '../client/login_register/client_login.dart';
+import '../client/login_register/client_register.dart';
+import '../firstscreen.dart';
 import '../screens/trial pages/iforweb.dart';
 import '../screens/trial pages/schedulepage.dart';
 import '../screens/trial pages/webframe.dart';
@@ -27,15 +31,23 @@ const String nap = 'nap';
 const String legalese = 'legalese';
 const String Splash = "splash";
 const String lawbot = 'lawbot';
+const String csignup = 'csignup';
+const String cregister = 'cregister';
+const String fs = 'fs';
+const String chome = 'chome';
 
 Route<dynamic> generalController(RouteSettings settings){
   switch (settings.name){
+    case fs:
+      return MaterialPageRoute(builder: (context) => const typechooser());
     case loginPage:
       return MaterialPageRoute(builder: (context) => const LoginPage());
     case signupPage:
       return MaterialPageRoute(builder: (context) => const SignupPage());
     case homePage:
       return MaterialPageRoute(builder: (context) => const HomePage());
+    case chome:
+      return MaterialPageRoute(builder: (context) => const clientHome());
     case settingsPage:
       return MaterialPageRoute(builder: (context) => const SettingsPage());
       // Pages in settings
@@ -54,6 +66,10 @@ Route<dynamic> generalController(RouteSettings settings){
       }else{
         return MaterialPageRoute(builder: (context) => Weba());
       }
+    case csignup:
+      return MaterialPageRoute(builder: (context) => ClientLogin());
+    case cregister:
+      return MaterialPageRoute(builder: (context) => ClientRegister());
     case Splash:
       return MaterialPageRoute(builder: (context) => const SplashScreen());
       // Default response

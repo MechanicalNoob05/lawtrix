@@ -19,15 +19,22 @@ class _SplashScreenState extends State<SplashScreen> {
     void whereToGo() async{
       var sharedpref = await SharedPreferences.getInstance();
       var isLoggedin = sharedpref.getString("token");
+      var usrtype  = sharedpref.get('usr_typ');
       Timer(const Duration(seconds: 2),(){
         if(isLoggedin!=null){
           if(isLoggedin != null ){
+            if(usrtype=='lsprovider'){
             Navigator.pushReplacementNamed(context, route.homePage );
+            }else if(usrtype=='client'){
+              Navigator.pushReplacementNamed(context, route.chome);
+            }else{
+              Navigator.pushReplacementNamed(context, route.fs );
+            }
           }else{
-            Navigator.pushReplacementNamed(context, route.loginPage );
+            Navigator.pushReplacementNamed(context, route.fs );
           }
         }else{
-          Navigator.pushReplacementNamed(context, route.loginPage );
+          Navigator.pushReplacementNamed(context, route.fs );
         }
       },);
     }

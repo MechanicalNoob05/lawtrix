@@ -1,16 +1,18 @@
+// import 'package:lawtrix/screens/trial%20pages/ajit_trial_screen.dart';
 import 'package:lawtrix/screens/trial%20pages/cases_screen.dart';
+import 'package:lawtrix/screens/trial%20pages/samarth_trial_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class NavDrawer extends StatefulWidget {
-  const NavDrawer({super.key});
+class clientNav extends StatefulWidget {
+  const clientNav({super.key});
 
   @override
-  State<NavDrawer> createState() => _NavDrawerState();
+  State<clientNav> createState() => _clientNavState();
 }
 
-class _NavDrawerState extends State<NavDrawer> {
+class _clientNavState extends State<clientNav> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -62,12 +64,12 @@ class _NavDrawerState extends State<NavDrawer> {
             leading: Icon(Icons.list),
             title: Text("Cases"),
             onTap: (){
-                Navigator.of(context).pushReplacement(
+              Navigator.of(context).push(
                   MaterialPageRoute(
-                builder: (context)=>const CasesPage()
-            )
-        );
-      },
+                      builder: (context)=>const CasesPage()
+                  )
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.picture_as_pdf),
@@ -81,13 +83,6 @@ class _NavDrawerState extends State<NavDrawer> {
             title: const Text("LawBot"),
             onTap: () {
               Navigator.popAndPushNamed(context, route.lawbot);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.calendar_month),
-            title: const Text("user side"),
-            onTap: () {
-              Navigator.popAndPushNamed(context, route.nap);
             },
           ),
           // ListTile(
@@ -134,8 +129,7 @@ class _NavDrawerState extends State<NavDrawer> {
             onTap: () async{
               var sharedpref = await SharedPreferences.getInstance();
               sharedpref.remove("token");
-              sharedpref.setString("usr_typ","");
-              Navigator.pushReplacementNamed(context, route.fs);
+              Navigator.pushReplacementNamed(context, route.loginPage);
             },
           )
 
