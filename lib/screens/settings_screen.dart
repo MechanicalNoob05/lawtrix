@@ -1,3 +1,4 @@
+import 'package:lawtrix/components/navigation_drawer.dart';
 import 'package:lawtrix/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
@@ -20,14 +21,8 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
-        actions: [
-          IconButton(onPressed: () async{
-    var sharedpref = await SharedPreferences.getInstance();
-    sharedpref.remove("token");
-    Navigator.pushReplacementNamed(context, route.loginPage);
-    }, icon: Icon(Icons.logout))
-        ],
       ),
+      drawer: NavDrawer(),
       body: ListView(
         children: [
           ListTile(

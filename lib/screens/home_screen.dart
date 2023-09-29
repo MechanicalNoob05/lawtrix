@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lawtrix/components/navigation_drawer.dart';
 import 'package:lawtrix/screens/home_screen/advocate_home_screen.dart';
+import 'package:lawtrix/screens/home_screen/moreinfo.dart';
 import 'package:lawtrix/screens/settings_screen.dart';
 import 'package:lawtrix/screens/trial%20pages/news_screen.dart';
 import 'package:lawtrix/screens/trial%20pages/cases_screen.dart';
@@ -13,59 +15,85 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentPageIndex = 0;
+  bool view = true;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(40),
-          topLeft: Radius.circular(40),
-        ),
-        child: NavigationBar(
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              selectedIcon: Icon(Icons.home),
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.calendar_month_outlined),
-              selectedIcon: Icon(Icons.calendar_month),
-              label: 'Schedule',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.rss_feed_outlined),
-              selectedIcon: Icon(Icons.rss_feed),
-              label: 'News',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.history),
-              label: 'History',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.account_circle_outlined),
-              selectedIcon: Icon(Icons.account_circle),
-              label: 'Account',
-            ),
-          ],
-        ),
+      appBar: AppBar(
+        title: const Text("Home"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  view = !view;
+                });
+              },
+              icon: view ? const Icon(Icons.dashboard) : const Icon(Icons.list))
+        ],
       ),
-      body: <Widget>[
-        AdvocateHomePage(),
-        CalenderPage(),
-        NewsFeed(),
-        CasesPage(),
-        SettingsPage(),
-      ][currentPageIndex],
+      drawer: NavDrawer(),
+      body: view
+          ? ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: AdvocateHomePage.types.length,
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      MoreDetails(type: AdvocateHomePage.types[index]),
+                ),
+              );
+            },
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              margin: const EdgeInsets.symmetric(vertical: 5),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('${AdvocateHomePage.types[index]} cases',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+              ),
+            ),
+          );
+        },
+      )
+          : Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 10,
+            ),
+            itemCount: AdvocateHomePage.types.length,
+            itemBuilder: (BuildContext context, int index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MoreDetails(
+                          type: AdvocateHomePage.types[index]),
+                    ),
+                  );
+                },
+                child: Card(
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  child: Center(
+                      child:
+                      Text('${AdvocateHomePage.types[index]} cases',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold))),
+                ),
+              );
+            }),
+      ),
     );
 
   }

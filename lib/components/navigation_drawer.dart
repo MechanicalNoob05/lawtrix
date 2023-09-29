@@ -62,7 +62,7 @@ class _NavDrawerState extends State<NavDrawer> {
             leading: Icon(Icons.list),
             title: Text("Cases"),
             onTap: (){
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                 builder: (context)=>const CasesPage()
             )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lawtrix/components/navigation_drawer.dart';
 import 'package:lawtrix/screens/trial%20pages/existing_cases.dart';
 import 'package:lawtrix/screens/trial%20pages/solved_cases.dart';
 class CasesPage extends StatelessWidget {
@@ -18,6 +19,7 @@ class CasesPage extends StatelessWidget {
             ],
           ),
         ),
+        drawer: NavDrawer(),
         body: TabBarView(
           children: [
             ExistingCasesPage(),
