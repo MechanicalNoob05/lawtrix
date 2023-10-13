@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(ProfileCreationApp());
-}
-
-class ProfileCreationApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        fontFamily: 'Montserrat', // Custom font
-      ),
-      home: ProfileCreationPage(),
-    );
-  }
-}
+import 'package:lawtrix/components/navigation_drawer.dart';
 
 class ProfileCreationPage extends StatelessWidget {
   @override
@@ -23,7 +7,9 @@ class ProfileCreationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Your Profile'),
+
       ),
+      // drawer: NavDrawer(),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(

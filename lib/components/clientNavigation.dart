@@ -1,9 +1,15 @@
 // import 'package:lawtrix/screens/trial%20pages/ajit_trial_screen.dart';
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:lawtrix/screens/trial%20pages/cases_screen.dart';
 import 'package:lawtrix/screens/trial%20pages/samarth_trial_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
+import 'package:lawtrix/sprovider_pages/profiles/sprov_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../sprovider_pages/profiles/sprov_profilecreation.dart';
 
 class clientNav extends StatefulWidget {
   const clientNav({super.key});
@@ -13,14 +19,28 @@ class clientNav extends StatefulWidget {
 }
 
 class _clientNavState extends State<clientNav> {
+  Map<String, dynamic>? profileData;
+  @override
+  void initState() {
+    super.initState();
+    loadProfileData();
+  }
+  Future<void> loadProfileData() async {
+    // Load and parse the JSON data
+    final String jsonContent = await rootBundle.loadString('assets/json/sprov_profile.json');
+    setState(() {
+      profileData = json.decode(jsonContent);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
         children: [
-          const UserAccountsDrawerHeader(
 
-            decoration: BoxDecoration(
+          UserAccountsDrawerHeader(
+
+            decoration: const BoxDecoration(
 
               gradient: LinearGradient(
                   begin: Alignment.bottomLeft,
@@ -30,14 +50,14 @@ class _clientNavState extends State<clientNav> {
                     Color(0xff5790ab),
                   ]),
             ),
-            accountEmail: Text("jayeshree@gmail.com"),
+            accountEmail: Text(profileData?['generalInformation']['email'] ?? ""),
             currentAccountPictureSize: Size(50, 50),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.transparent,
               backgroundImage: NetworkImage("https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"),
             ),
             accountName: Text(
-              "Jayeshree",
+              profileData?['generalInformation']['name'] ?? "",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -85,28 +105,7 @@ class _clientNavState extends State<clientNav> {
               Navigator.popAndPushNamed(context, route.lawbot);
             },
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.downloading),
-          //   title: const Text("Samarth"),
-          //   onTap: (){
-          //     Navigator.of(context).push(
-          //         MaterialPageRoute(
-          //             builder: (context)=>const SamarthTrialPage()
-          //         )
-          //     );
-          //   },
-          // ),
-          // ListTile(
-          //   leading: const Icon(Icons.downloading),
-          //   title: const Text("Ajit"),
-          //   onTap: (){
-          //     Navigator.of(context).push(
-          //         MaterialPageRoute(
-          //             builder: (context)=>const AjitTrialPage()
-          //         )
-          //     );
-          //   },
-          // ),
+
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text("Settings"),

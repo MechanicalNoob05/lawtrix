@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../components/clientNavigation.dart';
-import '../../screens/trial pages/sprov_profile.dart';
-import '../../screens/trial pages/sprov_profilecreation.dart';
+import '../../sprovider_pages/profiles/sprov_profile.dart';
+import '../../sprovider_pages/profiles/sprov_profilecreation.dart';
 import '../forms/requesthome.dart';
+import '../trials/explore.dart';
 
 class clientHome extends StatelessWidget {
   const clientHome({super.key});
@@ -22,7 +23,7 @@ class clientHome extends StatelessWidget {
             onPressed: (){
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ProfileCreationApp(),
+                  builder: (context) => ExplorePage(),
                 ),
               );
             },

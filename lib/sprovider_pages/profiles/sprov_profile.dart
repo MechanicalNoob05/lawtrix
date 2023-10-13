@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
+import 'dart:convert'; // Import the convert library
+import 'package:flutter/services.dart';
+import 'package:lawtrix/sprovider_pages/profiles/sprov_profilecreation.dart';
 
-void main() {
-  runApp(ProfileApp());
-}
+import '../../components/navigation_drawer.dart';
 
-class ProfileApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        fontFamily: 'Montserrat', // Custom font
-      ),
-      home: ProfilePage(),
-    );
-  }
-}
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -25,6 +14,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _offset;
+  Map<String, dynamic>? profileData; // Store the JSON data
 
   @override
   void initState() {
@@ -43,8 +33,19 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       curve: Curves.easeOut,
     ));
 
+    // Load and parse the JSON data
+    loadProfileData();
+
     // Start the animations with delays
     startAnimations();
+  }
+
+  Future<void> loadProfileData() async {
+    // Load and parse the JSON data
+    final String jsonContent = await rootBundle.loadString('assets/json/sprov_profile.json');
+    setState(() {
+      profileData = json.decode(jsonContent);
+    });
   }
 
   Future<void> startAnimations() async {
@@ -68,6 +69,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       appBar: AppBar(
         title: Text('Service Provider Profile'),
       ),
+      drawer: NavDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                   child: Center(
                     child: CircleAvatar(
                       radius: 60,
-                      backgroundImage: AssetImage('assets/images/logo.png'),
+                      backgroundImage: AssetImage(profileData?['headerImage'] ?? 'assets/images/logo.png'),
                     ),
                   ),
                 ),
@@ -109,10 +111,10 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    Text('Name: John Doe'),
-                    Text('Location: New York, USA'),
-                    Text('Email: john.doe@example.com'),
-                    Text('Phone: +1 (123) 456-7890'),
+                    Text('Name: ${profileData?['generalInformation']['name'] ?? ''}'),
+                    Text('Location: ${profileData?['generalInformation']['location'] ?? ''}'),
+                    Text('Email: ${profileData?['generalInformation']['email'] ?? ''}'),
+                    Text('Phone: ${profileData?['generalInformation']['phone'] ?? ''}'),
                   ],
                 ),
               ),
@@ -131,9 +133,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    Text('Corporate Law'),
-                    Text('Criminal Defense'),
-                    Text('Family Law'),
+                    for (var skill in profileData?['skills'] ?? [])
+                      Text('$skill'),
                   ],
                 ),
               ),
@@ -152,9 +153,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    Text('1. Smith v. Jones (2022)'),
-                    Text('2. State v. Johnson (2021)'),
-                    Text('3. Doe v. Roe (2020)'),
+                    for (var notableCase in profileData?['notableCases'] ?? [])
+                      Text('$notableCase'),
                   ],
                 ),
               ),
@@ -173,8 +173,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    Text('LL.B. - Harvard Law School'),
-                    Text('B.A. in Political Science - Stanford University'),
+                    for (var education in profileData?['education'] ?? [])
+                      Text('$education'),
                   ],
                 ),
               ),
@@ -193,8 +193,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    Text('Best Lawyer Award (2021)'),
-                    Text('Legal Eagle Award (2020)'),
+                    for (var award in profileData?['awardsAndRecognitions'] ?? [])
+                      Text('$award'),
                   ],
                 ),
               ),
@@ -213,10 +213,25 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    Text('Website: www.johndoelegal.com'),
-                    Text('LinkedIn: linkedin.com/in/johndoe'),
+                    Text('Website: ${profileData?['contactInformation']['website'] ?? ''}'),
+                    Text('LinkedIn: ${profileData?['contactInformation']['linkedin'] ?? ''}'),
                   ],
                 ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(20),
+              alignment: Alignment.center,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileCreationPage(), // Navigate to the ProfileCreationPage
+                    ),
+                  );
+                },
+                child: Text('Edit Profile'),
               ),
             ),
           ],

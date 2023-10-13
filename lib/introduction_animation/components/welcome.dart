@@ -14,7 +14,7 @@ class _welcomeState extends State<welcome> {
   @override
   Widget build(BuildContext context) {
     final _introductionanimation =
-        Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0.0, -1.0))
+        Tween<Offset>(begin: const Offset(0, 0.765), end: const Offset(0.0, -1.0))
             .animate(CurvedAnimation(
       parent: widget.animationController,
       curve: const Interval(
