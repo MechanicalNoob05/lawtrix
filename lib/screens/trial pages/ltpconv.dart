@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lawtrix/components/navigation_drawer.dart';
+// import 'package:lawtrix/components/client_navigation_drawer.dart'; // Import the ClientNav() if you have one
 import 'dart:convert';
 import 'dart:io';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:file_picker/file_picker.dart';
+import '../../components/clientNavigation.dart';
 import 'constants.dart'; // Import your legal jargons dictionary here
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
 
 class PDFTextViewer extends StatefulWidget {
   @override
@@ -15,6 +18,18 @@ class PDFTextViewer extends StatefulWidget {
 class _PDFTextViewerState extends State<PDFTextViewer> {
   File? _selectedPDF;
   TextEditingController _textEditingController = TextEditingController();
+  late Future<String> _usrType;
+
+  @override
+  void initState() {
+    super.initState();
+    _usrType = _getUserType();
+  }
+
+  Future<String> _getUserType() async {
+    final sharedpref = await SharedPreferences.getInstance();
+    return sharedpref.getString('usr_typ') ?? 'default'; // 'default' can be a fallback value
+  }
 
   @override
   void dispose() {
@@ -103,7 +118,22 @@ class _PDFTextViewerState extends State<PDFTextViewer> {
       appBar: AppBar(
         title: Text('PDF Text Viewer'),
       ),
-      drawer: NavDrawer(),
+      drawer: FutureBuilder<String>(
+        future: _usrType,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            final usrType = snapshot.data;
+
+            if (usrType == 'client') {
+              return clientNav();
+            } else {
+              return NavDrawer();
+            }
+          } else {
+            return CircularProgressIndicator(); // Show loading indicator while fetching user type
+          }
+        },
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../components/clientNavigation.dart';
+import '../../screens/trial pages/sprov_profile.dart';
+import '../../screens/trial pages/sprov_profilecreation.dart';
+import '../forms/requesthome.dart';
 
 class clientHome extends StatelessWidget {
   const clientHome({super.key});
@@ -13,9 +16,18 @@ class clientHome extends StatelessWidget {
           title: const Text("Home"),
         ),
         drawer: const clientNav(),
-        body: const Padding(
+        body:  Padding(
           padding: EdgeInsets.all(10.0),
-          child: Center(child: Text("Home")),
+          child: ElevatedButton(
+            onPressed: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ProfileCreationApp(),
+                ),
+              );
+            },
+              child: Text("Home")),
+
         )
     );
   }
