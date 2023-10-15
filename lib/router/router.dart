@@ -18,6 +18,7 @@ import '../firstscreen.dart';
 import '../screens/trial pages/iforweb.dart';
 import '../screens/trial pages/schedulepage.dart';
 import '../screens/trial pages/webframe.dart';
+import '../sprovider_pages/dashboard/sprov_home.dart';
 
 const String loginPage = 'login';
 const String signupPage = 'signup';
@@ -45,7 +46,7 @@ Route<dynamic> generalController(RouteSettings settings){
     case signupPage:
       return MaterialPageRoute(builder: (context) => const SignupPage());
     case homePage:
-      return MaterialPageRoute(builder: (context) => const HomePage());
+      return MaterialPageRoute(builder: (context) =>  DashboardHandler());
     case chome:
       return MaterialPageRoute(builder: (context) => const clientHome());
     case settingsPage:
@@ -57,7 +58,7 @@ Route<dynamic> generalController(RouteSettings settings){
       return MaterialPageRoute(builder: (context) =>  CalenderPage());
     case nap:
       open();
-      return MaterialPageRoute(builder: (context) => const HomePage());
+      return MaterialPageRoute(builder: (context) =>  DashboardHandler());
     case legalese:
       return MaterialPageRoute(builder: (context) => PDFTextViewer());
     case lawbot:

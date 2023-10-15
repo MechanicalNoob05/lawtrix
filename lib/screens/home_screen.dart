@@ -20,82 +20,99 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  view = !view;
-                });
-              },
-              icon: view ? const Icon(Icons.dashboard) : const Icon(Icons.list))
-        ],
-      ),
-      drawer: NavDrawer(),
-      body: view
-          ? ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: AdvocateHomePage.types.length,
-        itemBuilder: (BuildContext context, int index) {
-          return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      MoreDetails(type: AdvocateHomePage.types[index]),
+      // drawer: NavDrawer(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      view = !view;
+                    });
+                  },
+                  icon: view
+                      ? const Icon(Icons.dashboard)
+                      : const Icon(Icons.list),
                 ),
-              );
-            },
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              margin: const EdgeInsets.symmetric(vertical: 5),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('${AdvocateHomePage.types[index]} cases',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-              ),
+              ],
             ),
-          );
-        },
-      )
-          : Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 10,
-            ),
-            itemCount: AdvocateHomePage.types.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MoreDetails(
-                          type: AdvocateHomePage.types[index]),
+          ),
+          Expanded(
+            child: view
+                ? ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: AdvocateHomePage.types.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            MoreDetails(type: AdvocateHomePage.types[index]),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('${AdvocateHomePage.types[index]} cases',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
+                : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10,
+                ),
+                itemCount: AdvocateHomePage.types.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MoreDetails(
+                            type: AdvocateHomePage.types[index],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      child: Center(
+                        child: Text(
+                          '${AdvocateHomePage.types[index]} cases',
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
                   );
                 },
-                child: Card(
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  child: Center(
-                      child:
-                      Text('${AdvocateHomePage.types[index]} cases',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold))),
-                ),
-              );
-            }),
+              ),
+            ),
+          ),
+        ],
       ),
     );
-
   }
 }
-
