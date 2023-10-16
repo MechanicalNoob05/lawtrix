@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../components/clientNavigation.dart';
-import '../../sprovider_pages/profiles/sprov_profile.dart';
-import '../../sprovider_pages/profiles/sprov_profilecreation.dart';
-import '../../sprovider_pages/dashboard/sprov_home.dart';
-import '../../sprovider_pages/sprov_trial/trial1.dart';
 import '../forms/requesthome.dart';
-import '../trials/explore.dart';
 
 class clientHome extends StatelessWidget {
   const clientHome({super.key});
@@ -25,7 +19,7 @@ class clientHome extends StatelessWidget {
             onPressed: (){
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => DashboardHandler(),
+                  builder: (context) => reqHome(),
                 ),
               );
             },

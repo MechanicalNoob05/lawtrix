@@ -1,15 +1,13 @@
 import 'dart:convert' show json;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lawtrix/sprovider_pages/sprov_trial/connection_profile.dart';
+import 'package:lawtrix/sprovider_pages/profiles/connection_profile.dart';
 
 class ConnectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Connections'),
-      ),
+
       body: FutureBuilder<List<Connection>>(
         future: _loadConnections(),
         builder: (context, snapshot) {
@@ -50,7 +48,7 @@ class ConnectionScreen extends StatelessWidget {
   }
 
   Future<List<Connection>> _loadConnections() async {
-    final String jsonData = await rootBundle.loadString('assets/json/other_profiles.json');
+    final String jsonData = await rootBundle.loadString('assets/json/sprov_invitations.json');
     final List<dynamic> jsonList = json.decode(jsonData)['connections'];
     return jsonList.map((json) => Connection.fromJson(json)).toList();
   }
