@@ -135,7 +135,7 @@ class _ConnectionProfilePageState extends State<ConnectionProfilePage> with Sing
                       // Handle the +Connect button action
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue, // Button color
+                      backgroundColor: Colors.blue, // Button color
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
