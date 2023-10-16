@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:lawtrix/client/forms/reqform.dart';
+import 'package:lawtrix/client/forms/CreatedRequests.dart';
+import 'package:lawtrix/components/clientNavigation.dart';
+import 'AppliedRequests.dart';
 import 'ongoingRequests.dart';
 
 class reqHome extends StatefulWidget {
@@ -30,17 +32,19 @@ class _reqHomeState extends State<reqHome> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Tabbed App'),
+          title: Text('Manage Requests'),
           bottom: TabBar(
             tabs: [
-              Tab(text: 'Ongoing Requests'),
-              Tab(text: 'Applied Requests'),
+              Tab(text: 'Accepted\nRequests'),
+              Tab(text: 'Applied\nRequests'),
+              Tab(text: 'Created\nRequests'),
             ],
           ),
         ),
+        drawer: clientNav(),
         body: TabBarView(
           children: [
             FutureBuilder<List<Map<String, dynamic>>>(
@@ -55,29 +59,32 @@ class _reqHomeState extends State<reqHome> {
                 }
               },
             ),
-            AppliedRequests(),
+            FutureBuilder<List<Map<String, dynamic>>>(
+              future: requests,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error loading data'));
+                } else {
+                  return AppliedRequests(snapshot.data!);
+                }
+              },
+            ),
+            FutureBuilder<List<Map<String, dynamic>>>(
+              future: requests,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error loading data'));
+                } else {
+                  return CreatedRequests(snapshot.data!);
+                }
+              },
+            )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AppliedRequests extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Applied Requests'),
-      ),
-      body: Center(
-        child: Text('Applied Requests'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => RequestForm()));
-        },
-        child: Icon(Icons.add),
       ),
     );
   }

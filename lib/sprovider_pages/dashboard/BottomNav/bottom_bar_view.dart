@@ -226,8 +226,9 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
+    return SizedBox(
+      height: 40,
+      width: 40,
       child: Center(
         child: InkWell(
           splashColor: Colors.transparent,

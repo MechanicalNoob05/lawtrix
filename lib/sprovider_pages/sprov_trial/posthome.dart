@@ -19,12 +19,14 @@ class PostList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Container(
+        margin: EdgeInsets.only(bottom: 80, right: 12),
+      child: ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) {
         return PostCard(posts[index]);
       },
-    );
+    ));
   }
 }
 

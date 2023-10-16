@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:lawtrix/components/navigation_drawer.dart';
+import 'package:lawtrix/components/clientNavigation.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../services/calendarutils.dart';
 
@@ -86,7 +86,7 @@ class _CalenderPageState extends State<CalenderPage> {
       appBar: AppBar(
         title: Text('TableCalendar - Events'),
       ),
-      drawer: NavDrawer(),
+      drawer: clientNav(),
       body: Column(
         children: [
           TableCalendar<Event>(

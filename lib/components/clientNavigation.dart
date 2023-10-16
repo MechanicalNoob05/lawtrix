@@ -1,15 +1,12 @@
-// import 'package:lawtrix/screens/trial%20pages/ajit_trial_screen.dart';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:lawtrix/screens/trial%20pages/cases_screen.dart';
-import 'package:lawtrix/screens/trial%20pages/samarth_trial_screen.dart';
+import 'package:lawtrix/client/ExplorePage/explore.dart';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/router/router.dart' as route;
-import 'package:lawtrix/sprovider_pages/profiles/sprov_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../sprovider_pages/profiles/sprov_profilecreation.dart';
+import '../client/forms/requesthome.dart';
 
 class clientNav extends StatefulWidget {
   const clientNav({super.key});
@@ -70,7 +67,18 @@ class _clientNavState extends State<clientNav> {
             leading: const Icon(Icons.grid_view_sharp),
             title: const Text("Dashboard"),
             onTap: () {
-              Navigator.popAndPushNamed(context, route.homePage);
+              Navigator.popAndPushNamed(context, route.chome);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.travel_explore_sharp),
+            title: const Text("Explore"),
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context)=> ExplorePage()
+                  )
+              );
             },
           ),
           ListTile(
@@ -82,11 +90,11 @@ class _clientNavState extends State<clientNav> {
           ),
           ListTile(
             leading: Icon(Icons.list),
-            title: Text("Cases"),
+            title: Text("Manage Requests"),
             onTap: (){
               Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context)=>const CasesPage()
+                      builder: (context)=>const reqHome()
                   )
               );
             },

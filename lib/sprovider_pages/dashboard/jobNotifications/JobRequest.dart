@@ -14,9 +14,7 @@ class _JobRequestsState extends State<JobRequests> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ongoing Requests'),
-      ),
+
       body: ListView.builder(
         itemCount: widget.requests.length,
         itemBuilder: (context, index) {

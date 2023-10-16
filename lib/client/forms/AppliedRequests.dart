@@ -1,23 +1,20 @@
-
 import 'package:flutter/material.dart';
+import 'package:lawtrix/client/ExplorePage/explore.dart';
+import 'package:lawtrix/client/forms/singler.dart';
 
-import '../../../client/forms/reqform.dart';
-import 'SingleRequest.dart';
-
-class Sprov_requests extends StatefulWidget {
+class AppliedRequests extends StatefulWidget {
   final List<Map<String, dynamic>> requests;
 
-  Sprov_requests(this.requests);
+  const AppliedRequests(this.requests, {super.key});
 
   @override
-  State<Sprov_requests> createState() => _Sprov_requestsState();
+  State<AppliedRequests> createState() => _AppliedRequestsState();
 }
 
-class _Sprov_requestsState extends State<Sprov_requests> {
+class _AppliedRequestsState extends State<AppliedRequests> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: ListView.builder(
         itemCount: widget.requests.length,
         itemBuilder: (context, index) {
@@ -28,11 +25,10 @@ class _Sprov_requestsState extends State<Sprov_requests> {
               title: Text(request['title']),
               subtitle: Text(request['service_details']['description']),
               onTap: () {
-                // Navigate to the new file that displays all the details
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NotificaionDetails(request),
+                    builder: (context) => RequestDetailsPage(request),
                   ),
                 );
               },
@@ -42,12 +38,12 @@ class _Sprov_requestsState extends State<Sprov_requests> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked, // Adjust placement as needed
       floatingActionButton: Container(
-        margin: EdgeInsets.only(bottom: 80, right: 12), // Adjust margin as needed
+        margin: const EdgeInsets.only(bottom: 35, right: 12), // Adjust margin as needed
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => RequestForm()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ExplorePage()));
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       ),
     );

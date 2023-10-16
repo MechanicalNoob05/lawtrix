@@ -79,13 +79,7 @@ class _NavDrawerState extends State<NavDrawer> {
               Navigator.popAndPushNamed(context, route.homePage);
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.calendar_month),
-            title: const Text("Schedule"),
-            onTap: () {
-              Navigator.popAndPushNamed(context, route.Cal);
-            },
-          ),
+
           ListTile(
             leading: Icon(Icons.list),
             title: Text("Cases"),
@@ -109,13 +103,6 @@ class _NavDrawerState extends State<NavDrawer> {
             title: const Text("LawBot"),
             onTap: () {
               Navigator.popAndPushNamed(context, route.lawbot);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.calendar_month),
-            title: const Text("user side"),
-            onTap: () {
-              Navigator.popAndPushNamed(context, route.nap);
             },
           ),
 

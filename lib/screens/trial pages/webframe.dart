@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb; // Import the kIsWeb constant
 import 'package:lawtrix/components/navigation_drawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../components/clientNavigation.dart';
 
 class Weba extends StatefulWidget {
   const Weba({Key? key}) : super(key: key);
@@ -12,10 +15,13 @@ class Weba extends StatefulWidget {
 
 class _WebaState extends State<Weba> {
   late final WebViewController _controller;
+  late Future<String> _usrType;
 
   @override
   void initState() {
     super.initState();
+    _usrType = _getUserType();
+
     try{
     final WebViewController controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -40,17 +46,12 @@ class _WebaState extends State<Weba> {
     }catch(e){
       _launchUrl();
     }
-
-
-    // Conditionally call _launchUrl on the web
-    // if (kIsWeb) {
-    //   _launchUrl();
-    // }
   }
-
-  // Define the _launchUrl function
+  Future<String> _getUserType() async {
+    final sharedpref = await SharedPreferences.getInstance();
+    return sharedpref.getString('usr_typ') ?? 'default'; // 'default' can be a fallback value
+  }
   void _launchUrl() {
-    // Add your web-specific code here
     print('Launching URL on the web');
   }
 
@@ -59,7 +60,22 @@ class _WebaState extends State<Weba> {
     return Scaffold(
       appBar: AppBar(title: const Text('LawTrixBot')),
       body: WebViewWidget(controller: _controller),
-      drawer: NavDrawer(),
+      drawer: FutureBuilder<String>(
+        future: _usrType,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            final usrType = snapshot.data;
+
+            if (usrType == 'client') {
+              return clientNav();
+            } else {
+              return NavDrawer();
+            }
+          } else {
+            return CircularProgressIndicator(); // Show loading indicator while fetching user type
+          }
+        },
+      ),
     );
   }
 }

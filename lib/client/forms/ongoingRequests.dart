@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:lawtrix/client/forms/singler.dart';
 // import 'package:your_project_name/request_details_page.dart';
@@ -16,9 +15,6 @@ class _OngoingRequestsState extends State<OngoingRequests> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ongoing Requests'),
-      ),
       body: ListView.builder(
         itemCount: widget.requests.length,
         itemBuilder: (context, index) {
