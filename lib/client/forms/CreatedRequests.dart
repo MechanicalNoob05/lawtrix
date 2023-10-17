@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:lawtrix/client/forms/singler.dart';
 import '../../../client/forms/reqform.dart';
+import '../trials/edittrial.dart';
 
 class CreatedRequests extends StatefulWidget {
   final List<Map<String, dynamic>> requests;
@@ -29,7 +29,7 @@ class _CreatedRequestsState extends State<CreatedRequests> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RequestDetailsPage(request),
+                    builder: (context) => EditRequests(request['id']),
                   ),
                 );
               },

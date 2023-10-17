@@ -24,7 +24,7 @@ class _clientNavState extends State<clientNav> {
   }
   Future<void> loadProfileData() async {
     // Load and parse the JSON data
-    final String jsonContent = await rootBundle.loadString('assets/json/sprov_profile.json');
+    final String jsonContent = await rootBundle.loadString('assets/json/client_profileData.json');
     setState(() {
       profileData = json.decode(jsonContent);
     });
@@ -35,35 +35,35 @@ class _clientNavState extends State<clientNav> {
       child: Column(
         children: [
 
-          UserAccountsDrawerHeader(
+      UserAccountsDrawerHeader(
+      decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.bottomLeft,
+        end: Alignment.topRight,
+        colors: [
+          Color(0xff064469),
+          Color(0xff5790ab),
+        ],
+      ),
+    ),
+    accountEmail: Text(profileData?['generalInformation']?['email'] ?? ""),
+    currentAccountPictureSize: Size(50, 50),
+    currentAccountPicture: CircleAvatar(
+    backgroundColor: Colors.transparent,
+    backgroundImage: AssetImage(profileData?['headerImage'] ?? "assets/images/logo.png"), // Provide a default image path
+    ),
+    accountName: Text(
+    profileData?['generalInformation']?['name'] ?? "",
+    style: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 30,
+    ),
+    textAlign: TextAlign.center,
+    ),
+    ),
 
-            decoration: const BoxDecoration(
-
-              gradient: LinearGradient(
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                  colors: [
-                    Color(0xff064469),
-                    Color(0xff5790ab),
-                  ]),
-            ),
-            accountEmail: Text(profileData?['generalInformation']['email'] ?? ""),
-            currentAccountPictureSize: Size(50, 50),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              backgroundImage: NetworkImage("https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"),
-            ),
-            accountName: Text(
-              profileData?['generalInformation']['name'] ?? "",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          ListTile(
+    ListTile(
             leading: const Icon(Icons.grid_view_sharp),
             title: const Text("Dashboard"),
             onTap: () {

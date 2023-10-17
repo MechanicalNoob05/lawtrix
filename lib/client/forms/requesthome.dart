@@ -13,17 +13,21 @@ class reqHome extends StatefulWidget {
 }
 
 class _reqHomeState extends State<reqHome> {
-  late Future<List<Map<String, dynamic>>> requests; // Declare as a Future
+  late Future<List<Map<String, dynamic>>> requests;// Declare as a Future
+  late Future<List<Map<String, dynamic>>> requestsTemplates;
+  late Future<List<Map<String, dynamic>>> requestsApplied;
 
   @override
   void initState() {
     super.initState();
     // Load the data when the widget is initialized
-    requests = loadRequests();
+    requests = loadRequests('assets/json/templates.json');
+    requestsTemplates = loadRequests('assets/json/created_requests.json');
+    requestsApplied = loadRequests('assets/json/client_applied_request.json');
   }
 
-  Future<List<Map<String, dynamic>>> loadRequests() async {
-    final data = await DefaultAssetBundle.of(context).loadString('assets/json/templates.json');
+  Future<List<Map<String, dynamic>>> loadRequests(path) async {
+    final data = await DefaultAssetBundle.of(context).loadString(path);
     final jsonData = json.decode(data);
     final requestList = jsonData['requests'];
     return List<Map<String, dynamic>>.from(requestList);
@@ -60,7 +64,7 @@ class _reqHomeState extends State<reqHome> {
               },
             ),
             FutureBuilder<List<Map<String, dynamic>>>(
-              future: requests,
+              future: requestsApplied,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -72,7 +76,7 @@ class _reqHomeState extends State<reqHome> {
               },
             ),
             FutureBuilder<List<Map<String, dynamic>>>(
-              future: requests,
+              future: requestsTemplates,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
