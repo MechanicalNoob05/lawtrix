@@ -44,23 +44,30 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   }
 
   Future<void> loadProfileData() async {
+    print("hello");
     try {
       // Make an HTTP GET request
-      final response = await http.get(Uri.parse('http://localhost:3000/user/signup'));
+      final response = await http.get(Uri.parse('http://localhost:3000/member/655891e393c147e73f8b9ba1'));
 
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON data
         final Map<String, dynamic> jsonData = json.decode(response.body);
-
+        print(jsonData);
         // Set the profileData
         setState(() {
           profileData = jsonData;
+          print("xxce");
+          print(profileData);
         });
       } else {
         // If the server did not return a 200 OK response, throw an exception.
         throw Exception('Failed to load profile data');
       }
     } catch (error) {
+      final String jsonContent = await rootBundle.loadString('assets/json/sprov_profile.json');
+      setState(() {
+        profileData = json.decode(jsonContent);
+      });
       print('Error fetching profile data: $error');
     }
 

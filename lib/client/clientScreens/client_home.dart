@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lawtrix/screens/trial%20pages/fetdata.dart';
 import '../../components/clientNavigation.dart';
+import '../../sprovider_pages/profiles/sprov_profile.dart';
 import '../forms/requesthome.dart';
 import '../trials/chattrial.dart';
 
@@ -20,7 +22,7 @@ class clientHome extends StatelessWidget {
             onPressed: (){
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) =>  ChatScreen(),
+                  builder: (context) =>  FetData(),
                 ),
               );
             },
