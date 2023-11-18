@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:file_picker/file_picker.dart';
+import '../../client/clientScreens/client_home.dart';
 import '../../components/clientNavigation.dart';
+import '../../sprovider_pages/dashboard/sprov_home.dart';
 import 'constants.dart'; // Import your legal jargons dictionary here
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
@@ -146,6 +148,29 @@ class _PDFTextViewerState extends State<PDFTextViewer> {
             ElevatedButton(
               onPressed: _extractText,
               child: Text('Extract Text'),
+            ),
+            SizedBox(height: 20),
+            //trials fobuttons
+            ElevatedButton(
+              onPressed: (){
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>  clientHome(),
+                  ),
+                );
+              },
+              child: Text('open client'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: (){
+            Navigator.of(context).push(
+            MaterialPageRoute(
+            builder: (context) =>  DashboardHandler(),
+            ),
+            );
+            },
+              child: Text('open provider'),
             ),
             SizedBox(height: 20),
             if (_selectedPDF != null)
