@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:lawtrix/sprovider_pages/profiles/sprov_profilecreation.dart';
 
 import '../../components/navigation_drawer.dart';
-
+import '../../models/sprovProfile_model.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -14,7 +15,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _offset;
-  Map<String, dynamic>? profileData; // Store the JSON data
+  Map<String, dynamic>? profileData;
+
+  Map<String, dynamic>? profileData1; // Store the JSON data
 
   @override
   void initState() {
@@ -41,11 +44,26 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   }
 
   Future<void> loadProfileData() async {
-    // Load and parse the JSON data
-    final String jsonContent = await rootBundle.loadString('assets/json/sprov_profile.json');
-    setState(() {
-      profileData = json.decode(jsonContent);
-    });
+    try {
+      // Make an HTTP GET request
+      final response = await http.get(Uri.parse('http://localhost:3000/user/signup'));
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, parse the JSON data
+        final Map<String, dynamic> jsonData = json.decode(response.body);
+
+        // Set the profileData
+        setState(() {
+          profileData = jsonData;
+        });
+      } else {
+        // If the server did not return a 200 OK response, throw an exception.
+        throw Exception('Failed to load profile data');
+      }
+    } catch (error) {
+      print('Error fetching profile data: $error');
+    }
+
   }
 
   Future<void> startAnimations() async {
