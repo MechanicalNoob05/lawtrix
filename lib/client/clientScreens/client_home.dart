@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../components/clientNavigation.dart';
 import '../forms/requesthome.dart';
+import '../trials/chattrial.dart';
 
 class clientHome extends StatelessWidget {
   const clientHome({super.key});
@@ -19,7 +20,7 @@ class clientHome extends StatelessWidget {
             onPressed: (){
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const reqHome(),
+                  builder: (context) =>  ChatScreen(),
                 ),
               );
             },

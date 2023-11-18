@@ -106,7 +106,7 @@ class introcb_view extends StatelessWidget {
                   child: Container(
                     constraints: const BoxConstraints(maxWidth: 350, maxHeight: 250),
                     child: Image.asset(
-                      'assets/introduction_animation/chatbot.png',
+                      'assets/introduction_animation/an.gif',
                       fit: BoxFit.contain,
                     ),
                   ),
