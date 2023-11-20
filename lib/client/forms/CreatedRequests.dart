@@ -1,52 +1,109 @@
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../../../client/forms/reqform.dart';
-import '../trials/edittrial.dart';
+import 'package:http/http.dart' as http;
 
-class CreatedRequests extends StatefulWidget {
-  final List<Map<String, dynamic>> requests;
+import '../forms/client_viewreq.dart';
+import '../forms/reqform.dart';
 
-  const CreatedRequests(this.requests, {super.key});
+class CaseListWidget extends StatefulWidget {
+  final String userId;
+
+  CaseListWidget(this.userId);
 
   @override
-  State<CreatedRequests> createState() => _CreatedRequestsState();
+  _CaseListWidgetState createState() => _CaseListWidgetState();
 }
 
-class _CreatedRequestsState extends State<CreatedRequests> {
+class _CaseListWidgetState extends State<CaseListWidget> {
+  List<Map<String, dynamic>> cases = [];
+  String errorMessage = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    try {
+      final response =
+      await http.get(Uri.parse("http://localhost:3000/case/user-cases/${widget.userId}"));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          cases = List<Map<String, dynamic>>.from(json.decode(response.body));
+          errorMessage = ''; // Clear any previous error message
+        });
+      } else {
+        setState(() {
+          cases = [];
+          errorMessage = 'Error: ${response.statusCode}';
+        });
+      }
+    } catch (error) {
+      setState(() {
+        cases = [];
+        errorMessage = 'Error: $error';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: widget.requests.length,
+      body: cases.isEmpty
+          ? Center(
+        child: Text(
+          errorMessage.isEmpty ? "Try creating some requests" : errorMessage,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      )
+          : ListView.builder(
+        itemCount: cases.length,
         itemBuilder: (context, index) {
-          final request = widget.requests[index];
-
+          final caseData = cases[index];
           return Card(
-            child: ListTile(
-              title: Text(request['title']),
-              subtitle: Text(request['service_details']['description']),
+            margin: EdgeInsets.all(8.0),
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: InkWell(
               onTap: () {
+                // Navigate to ClientViewRequests with the case ID
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EditRequests(request['id']),
+                    builder: (context) => ClientViewRequests(caseData['_id']),
                   ),
                 );
               },
+              child: ListTile(
+                title: Text(
+                  caseData['title'],
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text('Description: On future update'),
+              ),
             ),
           );
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked, // Adjust placement as needed
-      floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 35, right: 12), // Adjust margin as needed
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => RequestForm()));
-          },
-          child: const Icon(Icons.add),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your logic for the + button action
+          // For example, navigate to a screen to create a new case
+          Navigator.push(context, MaterialPageRoute(builder: (context) => RequestForm()));
+        },
+        child: Icon(Icons.add),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

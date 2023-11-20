@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert'; // Import the convert library
 import 'package:flutter/services.dart';
 import 'package:lawtrix/sprovider_pages/profiles/sprov_profilecreation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../components/navigation_drawer.dart';
 import '../../models/sprovProfile_model.dart';
@@ -44,9 +45,10 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   }
 
   Future<void> loadProfileData() async {
-    print("hello");
     try {
       // Make an HTTP GET request
+      var sharedpref = await SharedPreferences.getInstance();
+      var token = sharedpref.getString("ProviderToken");
       final response = await http.get(Uri.parse('http://localhost:3000/member/655891e393c147e73f8b9ba1'));
 
       if (response.statusCode == 200) {
@@ -56,8 +58,6 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
         // Set the profileData
         setState(() {
           profileData = jsonData;
-          print("xxce");
-          print(profileData);
         });
       } else {
         // If the server did not return a 200 OK response, throw an exception.

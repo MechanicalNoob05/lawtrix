@@ -51,7 +51,7 @@ class _FetDataState extends State<FetData> {
         // final Map<String, dynamic> jsonData = json.decode(response.body); //made for finale
         // print(jsonData['contact_information']['email']);
         // // Create a Person object from the parsed JSON
-        print(jsonData[]);
+        print(jsonData);
         // return yourData;
       } else {
         // Handle the error as needed
