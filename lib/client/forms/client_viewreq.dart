@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../services/apiServices/apiHelper.dart';
+
 class ClientViewRequests extends StatefulWidget {
   final String selectedId;
 
@@ -31,11 +33,11 @@ class _ClientViewRequestsState extends State<ClientViewRequests> {
 
   Future<void> fetchData() async {
     final response =
-    await http.get(Uri.parse("http://localhost:3000/case/${widget.selectedId}"));
-
-    if (response.statusCode == 200) {
+    // await http.get(Uri.parse("http://localhost:3000/case/${widget.selectedId}"));
+    await ApiHelper.callApiAndParse("http://localhost:3000/case/${widget.selectedId}");
+    // if (response.statusCode == 200) {
       setState(() {
-        requestData = json.decode(response.body);
+        requestData = response;
 
         // Set initial values for controllers
         titleController.text = requestData['title'];
@@ -46,10 +48,10 @@ class _ClientViewRequestsState extends State<ClientViewRequests> {
         attachedDocumentsController.text =
             requestData['document_upload']['attached_documents'].toString();
       });
-    } else {
-      // Handle error
-      print("Error: ${response.statusCode}");
-    }
+    // } else {
+    //   // Handle error
+    //   print("Error: ${response.statusCode}");
+    // }
   }
 
   void toggleEditing() {
@@ -60,6 +62,7 @@ class _ClientViewRequestsState extends State<ClientViewRequests> {
 
   void saveDetails() {
     // Implement your save logic here
+    toggleEditing();
     print("Saving details...");
 
     // You can access the edited values using the controllers

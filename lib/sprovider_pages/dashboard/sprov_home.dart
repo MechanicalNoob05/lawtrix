@@ -3,7 +3,7 @@ import 'package:lawtrix/components/navigation_drawer.dart';
 import 'package:lawtrix/sprovider_pages/dashboard/sprov_theme.dart';
 import 'package:lawtrix/sprovider_pages/dashboard/tabIcon_data.dart';
 import '../../screens/home_screen.dart';
-import '../sprov_trial/posthome.dart';
+import 'feed/posthome.dart';
 import 'Network_Invitations/netcomplete.dart';
 import 'BottomNav/bottom_bar_view.dart';
 import 'jobNotifications/NotificationHome.dart';

@@ -1,8 +1,18 @@
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:lawtrix/components/clientNavigation.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../services/calendarutils.dart';
+import 'package:lawtrix/components/clientNavigation.dart';
+
+class Event {
+  final String title;
+
+  Event(this.title);
+
+  @override
+  String toString() => title;
+}
 
 class CalenderPage extends StatefulWidget {
   @override
@@ -34,17 +44,37 @@ class _CalenderPageState extends State<CalenderPage> {
   }
 
   List<Event> _getEventsForDay(DateTime day) {
-    // Implementation example
-    return kEvents[day] ?? [];
+    // Load events from a JSON file
+    final Map<String, dynamic> jsonEvents = loadEventsFromJson();
+    final List<String>? eventsList = jsonEvents[day.toString()]?.cast<String>();
+
+    final events = eventsList?.map<Event>((e) => Event(e)).toList() ?? [];
+
+    return events;
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
-    // Implementation example
+    // Load events for the range from a JSON file
+    final Map<String, dynamic> jsonEvents = loadEventsFromJson();
     final days = daysInRange(start, end);
 
-    return [
-      for (final d in days) ..._getEventsForDay(d),
-    ];
+    List<Event> events = [];
+    for (final d in days) {
+      final List<String>? eventsList = jsonEvents[d.toString()]?.cast<String>();
+      events.addAll(eventsList?.map<Event>((e) => Event(e)).toList() ?? []);
+    }
+
+    return events;
+  }
+
+
+  Map<String, List<String>> loadEventsFromJson() {
+    // Dummy JSON for testing
+    return {
+      "2023-11-01": ["Event 1", "Event 2"],
+      "2023-11-02": ["Event 3"],
+      // Add more dates and events as needed
+    };
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {

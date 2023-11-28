@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../services/apiServices/apiHelper.dart';
 import '../forms/client_viewreq.dart';
 import '../forms/reqform.dart';
 
@@ -27,19 +28,21 @@ class _CaseListWidgetState extends State<CaseListWidget> {
   Future<void> fetchData() async {
     try {
       final response =
-      await http.get(Uri.parse("http://localhost:3000/case/user-cases/${widget.userId}"));
+      // await http.get(Uri.parse("http://localhost:3000/case/user-cases/${widget.userId}"));
+      await ApiHelper.callApiAndParseList("http://localhost:3000/case/user-cases/${widget.userId}");
 
-      if (response.statusCode == 200) {
+      // if (response.statusCode == 200) {
         setState(() {
-          cases = List<Map<String, dynamic>>.from(json.decode(response.body));
+          // cases = List<Map<String, dynamic>>.from(json.decode(response.body));
+          cases = response;
           errorMessage = ''; // Clear any previous error message
         });
-      } else {
-        setState(() {
-          cases = [];
-          errorMessage = 'Error: ${response.statusCode}';
-        });
-      }
+      // } else {
+      //   setState(() {
+      //     cases = [];
+      //     errorMessage = 'Error: ${response.statusCode}';
+      //   });
+      // }
     } catch (error) {
       setState(() {
         cases = [];

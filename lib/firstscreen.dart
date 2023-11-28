@@ -40,6 +40,7 @@ class _typechooserState
     print(_animationController?.value);
     return Scaffold(
       backgroundColor: Color(0xffF7EBE1),
+      // backgroundColor: Color(0xff293241),
       body: ClipRect(
         child: Stack(
           children: [
