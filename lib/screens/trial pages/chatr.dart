@@ -25,7 +25,7 @@ class _CJScreenState extends State<CJScreen> {
   Future<void> _sendRequest() async {
     final url = Uri.parse("https://api-inference.huggingface.co/models/CamodDew/flanTrial1");
     final headers = {'Content-Type': 'application/json'};
-    final body = {'inputs': _inputController.text};
+    final body = {'inputs': _inputController.text.toLowerCase()};
     final response = await http.post(url, headers: headers, body: jsonEncode(body));
 
     if (response.statusCode == 200) {

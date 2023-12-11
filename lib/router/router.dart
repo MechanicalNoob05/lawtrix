@@ -1,8 +1,8 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:lawtrix/screens/trial%20pages/ltpconv.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+// import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:lawtrix/screens/allSettingsScreenCollection/account_setting_screen.dart';
-import 'package:lawtrix/screens/home_screen.dart';
+// import 'package:lawtrix/screens/home_screen.dart';
 import 'package:lawtrix/screens/login_screen.dart';
 import 'package:lawtrix/screens/settings_screen.dart';
 import 'package:lawtrix/screens/signup_screen.dart';
@@ -15,9 +15,10 @@ import '../client/clientScreens/client_home.dart';
 import '../client/login_register/client_login.dart';
 import '../client/login_register/client_register.dart';
 import '../firstscreen.dart';
-import '../screens/trial pages/iforweb.dart';
+import '../screens/trial pages/chatr.dart';
+// import '../screens/trial pages/iforweb.dart';
 import '../screens/trial pages/schedulepage.dart';
-import '../screens/trial pages/webframe.dart';
+// import '../screens/trial pages/webframe.dart';
 import '../sprovider_pages/dashboard/sprov_home.dart';
 
 const String loginPage = 'login';
@@ -62,11 +63,12 @@ Route<dynamic> generalController(RouteSettings settings){
     case legalese:
       return MaterialPageRoute(builder: (context) => PDFTextViewer());
     case lawbot:
-      if(kIsWeb){
-        return MaterialPageRoute(builder: (context) => webb());
-      }else{
-        return MaterialPageRoute(builder: (context) => Weba());
-      }
+      return MaterialPageRoute(builder: (context) => CJScreen());
+      // if(kIsWeb){
+      //   return MaterialPageRoute(builder: (context) => webb());
+      // }else{
+      //   return MaterialPageRoute(builder: (context) => Weba());
+      // }
     case csignup:
       return MaterialPageRoute(builder: (context) => ClientLogin());
     case cregister:
