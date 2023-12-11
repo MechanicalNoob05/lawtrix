@@ -66,7 +66,7 @@ class ProfileCreationPage extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20, bottom: 10),
       child: Text(
         title,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue),
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.purple),
       ),
     );
   }
