@@ -2,9 +2,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:http/http.dart' as http;
-import 'package:lawtrix/models/sprovProfile_model.dart';
+
 
 class FetData extends StatefulWidget {
   const FetData({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _FetDataState extends State<FetData> {
   Future<void> getdata1() async {
 
     // Replace 'your_api_url' with the actual URL of the API you want to retrieve data from
-    var url = Uri.parse('http://localhost:3000/user');
+    var url = Uri.parse('https://lawtrix-backend-server.onrender.com/user');
 
     try {
       var response = await http.get(url);
@@ -44,8 +44,8 @@ class _FetDataState extends State<FetData> {
         // print(yourData.runtimeType);
         // var yourd = response.body;
         // print(yourd);
-        var ds = response.body;
-        var ds1 = rem(ds);
+        // var ds = response.body;
+
         List<dynamic>  jsonData = jsonDecode(response.body);
 
         // final Map<String, dynamic> jsonData = json.decode(response.body); //made for finale

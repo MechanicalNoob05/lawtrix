@@ -1,10 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:lawtrix/services/upload_photo_service.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:lawtrix/router/router.dart' as route;
-// import 'package:image_picker/image_picker.dart';
+
 
 class ClientRegister extends StatefulWidget {
   const ClientRegister({super.key});
@@ -13,14 +11,14 @@ class ClientRegister extends StatefulWidget {
   State<ClientRegister> createState() => _ClientRegisterState();
 }
 
-final url = Uri.parse("http://localhost:3000/user/signup");
+final url = Uri.parse("https://lawtrix-backend-server.onrender.com/user/signup");
 
 class _ClientRegisterState extends State<ClientRegister> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  String? _path;
+
 
   // void selectImage() async {
   //   try {

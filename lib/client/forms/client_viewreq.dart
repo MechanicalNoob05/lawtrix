@@ -1,7 +1,7 @@
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
 
 import '../../services/apiServices/apiHelper.dart';
 
@@ -34,7 +34,7 @@ class _ClientViewRequestsState extends State<ClientViewRequests> {
   Future<void> fetchData() async {
     final response =
     // await http.get(Uri.parse("http://localhost:3000/case/${widget.selectedId}"));
-    await ApiHelper.callApiAndParse("http://localhost:3000/case/${widget.selectedId}");
+    await ApiHelper.callApiAndParse("https://lawtrix-backend-server.onrender.com/case/${widget.selectedId}");
     // if (response.statusCode == 200) {
       setState(() {
         requestData = response;

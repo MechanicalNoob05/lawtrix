@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class _sprov_viewRequestinfoState extends State<sprov_viewRequestinfo> {
 
   Future<void> fetchData() async {
     final response =
-    await ApiHelper.callApiAndParse("http://localhost:3000/case/${widget.caseid}");
+    await ApiHelper.callApiAndParse("https://lawtrix-backend-server.onrender.com/case/${widget.caseid}");
     setState(() {
       print("xxce"+"\n"+response.runtimeType.toString()+"\n"+response.toString());
       requestData = response;
@@ -35,7 +35,7 @@ class _sprov_viewRequestinfoState extends State<sprov_viewRequestinfo> {
     var userResponse;
     try {
       userResponse = await ApiHelper.callApiAndParse(
-          "http://localhost:3000/user/"+requestData['user_information']);
+          "https://lawtrix-backend-server.onrender.com/user/"+requestData['user_information']);
     } catch (e) {
       userResponse = {};
     }

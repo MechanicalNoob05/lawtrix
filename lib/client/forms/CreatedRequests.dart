@@ -1,6 +1,6 @@
-import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
 
 import '../../services/apiServices/apiHelper.dart';
 import '../forms/client_viewreq.dart';
@@ -29,7 +29,7 @@ class _CaseListWidgetState extends State<CaseListWidget> {
     try {
       final response =
       // await http.get(Uri.parse("http://localhost:3000/case/user-cases/${widget.userId}"));
-      await ApiHelper.callApiAndParseList("http://localhost:3000/case/user-cases/${widget.userId}");
+      await ApiHelper.callApiAndParseList("https://lawtrix-backend-server.onrender.com/case/user-cases/${widget.userId}");
 
       // if (response.statusCode == 200) {
         setState(() {

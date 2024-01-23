@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:convert'; // Import the convert library
 import 'package:flutter/services.dart';
 import 'package:lawtrix/sprovider_pages/profiles/sprov_profilecreation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../components/navigation_drawer.dart';
-import '../../models/sprovProfile_model.dart';
+
 import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
@@ -47,9 +47,9 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   Future<void> loadProfileData() async {
     try {
       // Make an HTTP GET request
-      var sharedpref = await SharedPreferences.getInstance();
-      var token = sharedpref.getString("ProviderToken");
-      final response = await http.get(Uri.parse('http://localhost:3000/member/655891e393c147e73f8b9ba1'));
+      // var sharedpref = await SharedPreferences.getInstance();
+      // var token = sharedpref.getString("ProviderToken");
+      final response = await http.get(Uri.parse('https://lawtrix-backend-server.onrender.com/member/655891e393c147e73f8b9ba1'));
 
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON data
