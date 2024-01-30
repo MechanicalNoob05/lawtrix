@@ -41,8 +41,8 @@ class _clientNavState extends State<clientNav> {
         begin: Alignment.bottomLeft,
         end: Alignment.topRight,
         colors: [
-          Color(0xff064469),
-          Color(0xff5790ab),
+          Color(0xff632299),
+          Color(0xff9e55f6),
         ],
       ),
     ),
