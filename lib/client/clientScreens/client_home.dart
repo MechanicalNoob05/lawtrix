@@ -4,6 +4,7 @@ import 'package:lawtrix/sprovider_pages/dashboard/feed/addPost.dart';
 import '../../components/clientNavigation.dart';
 import '../../screens/trial pages/chatr.dart';
 import '../../sprovider_pages/profiles/sprov_profile.dart';
+import '../../sprovider_pages/sprov_trial/legalresources.dart';
 import '../../sprovider_pages/sprov_trial/viewRequest.dart';
 import '../forms/CreatedRequests.dart';
 import '../forms/client_viewreq.dart';
@@ -31,7 +32,8 @@ class clientHome extends StatelessWidget {
                   // builder: (context) => sprov_viewRequestinfo('655aef8f3c0f33d37e9ee92a'),
                   // builder: (context) =>  viewRequestInfor( Rid: '655aef8f3c0f33d37e9ee92a'),
                   // builder: (context) =>  CaseListWidget('655aedef3c0f33d37e9ee923'),
-                  builder: (context) => CJScreen(),
+                  // builder: (context) => CJScreen(),
+                  builder:(context)=> PDFListScreen(),
                 ),
               );
             },

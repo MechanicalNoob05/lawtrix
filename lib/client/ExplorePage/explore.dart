@@ -12,11 +12,11 @@ class ExplorePage extends StatefulWidget {
 
 class ExplorePageState extends State<ExplorePage> {
   List<String> promoCardCategories = [
-    'lawyer',
-    'arbitrator',
-    'mediator',
-    'documentwriter',
-    'notary',
+    'Lawyer',
+    'Arbitrator',
+    'Mediator',
+    'Documentwriter',
+    'Notary',
   ];
 
   @override
@@ -45,7 +45,7 @@ class ExplorePageState extends State<ExplorePage> {
                   children: <Widget>[
                     const Text(
                       'Find Your,',
-                      style: TextStyle(color: Colors.black87, fontSize: 25),
+                      style: TextStyle(color: Colors.purple, fontSize: 25),
                     ),
                     const SizedBox(
                       height: 5,
@@ -53,7 +53,7 @@ class ExplorePageState extends State<ExplorePage> {
                     const Text(
                       'Provider',
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.purple,
                           fontSize: 40,
                           fontWeight: FontWeight.bold),
                     ),
@@ -94,7 +94,9 @@ class ExplorePageState extends State<ExplorePage> {
                     const Text(
                       'Categories',
                       style:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      TextStyle(color: Colors.purple,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 15,
@@ -105,11 +107,11 @@ class ExplorePageState extends State<ExplorePage> {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
-                            promoCard('assets/images/logo.png',0),//1
-                            promoCard('assets/images/logo.png',1),//2
-                            promoCard('assets/images/logo.png',2),//3
-                            promoCard('assets/images/logo.png',3),//4
-                            promoCard('assets/images/logo.png',4),//5
+                            promoCard('assets/images/lawyer.jpg',0),//1
+                            promoCard('assets/images/arbitrator.png',1),//2
+                            promoCard('assets/images/mediator.jpg',2),//3
+                            promoCard('assets/images/doc_write.jpg',3),//4
+                            promoCard('assets/images/notary_pur.jpg',4),//5
                           ],
                         ),
                       ),
@@ -123,7 +125,7 @@ class ExplorePageState extends State<ExplorePage> {
                         borderRadius: BorderRadius.circular(20),
                         image: const DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/images/logo.png')),
+                            image: AssetImage('assets/images/law_services.png')),
                       ),
                       child: Container(
                         decoration: BoxDecoration(

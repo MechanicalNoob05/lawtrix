@@ -20,6 +20,7 @@ import '../screens/trial pages/chatr.dart';
 import '../screens/trial pages/schedulepage.dart';
 // import '../screens/trial pages/webframe.dart';
 import '../sprovider_pages/dashboard/sprov_home.dart';
+import '../sprovider_pages/sprov_trial/legalresources.dart';
 
 const String loginPage = 'login';
 const String signupPage = 'signup';
@@ -37,6 +38,7 @@ const String csignup = 'csignup';
 const String cregister = 'cregister';
 const String fs = 'fs';
 const String chome = 'chome';
+const String lres = 'lres';
 
 Route<dynamic> generalController(RouteSettings settings){
   switch (settings.name){
@@ -75,8 +77,11 @@ Route<dynamic> generalController(RouteSettings settings){
       return MaterialPageRoute(builder: (context) => ClientRegister());
     case Splash:
       return MaterialPageRoute(builder: (context) => const SplashScreen());
+    case lres:
+      return MaterialPageRoute(builder: (context) =>  PDFListScreen());
       // Default response
     default:
+
       throw("Route non existing");
   }
 }

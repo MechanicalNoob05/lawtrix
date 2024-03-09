@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if(isLoggedin!=null){
           if(isLoggedin != null ){
             if(usrtype=='lsprovider'){
-            Navigator.pushReplacementNamed(context, route.homePage );
+              Navigator.pushReplacementNamed(context, route.homePage );
             }else if(usrtype=='client'){
               Navigator.pushReplacementNamed(context, route.chome);
             }else{
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return const Scaffold(
       body: Center(
           child: Image(
-            height: 200,
+              height: 200,
               width: 200,
               image: AssetImage("assets/images/logo.png"))
       ),

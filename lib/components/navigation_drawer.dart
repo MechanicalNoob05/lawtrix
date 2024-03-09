@@ -52,8 +52,8 @@ class _NavDrawerState extends State<NavDrawer> {
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
                   colors: [
-                    Color(0xff064469),
-                    Color(0xff5790ab),
+                    Color(0xff7a08d8),
+                    Color(0xff8c4cd8),
                   ]),
             ),
             accountEmail: Text(profileData?['generalInformation']['email'] ?? ""),
@@ -103,6 +103,13 @@ class _NavDrawerState extends State<NavDrawer> {
             title: const Text("LawBot"),
             onTap: () {
               Navigator.popAndPushNamed(context, route.lawbot);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.picture_as_pdf_sharp),
+            title: const Text("Resources"),
+            onTap: () {
+              Navigator.popAndPushNamed(context, route.lres);
             },
           ),
 
